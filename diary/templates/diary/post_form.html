@@ -1,0 +1,52 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+<form action="" method="post">
+    <h2>タイトル</h2>
+    {{ form.title }}
+    <h2>日付</h2>
+    {{ form.date}}
+    
+      {% for form in formset %}
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-3">
+              {{ form.time.label_tag }} 
+              {{ form.time }}  {{ form.time.errors }}
+          </div>
+          <div class="col-lg-5">
+           {{ form.text.label_tag }}
+           {{ form.text }} {{ form.time.errors }}
+          </div>
+          <div class="col-lg-4">
+             {{ form.text2.label_tag }}
+            {{ form.text2 }} {{ form.text2.errors }}
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+
+    {{ formset.management_form }}
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary btn-lg">送信</button>
+</form>
+{% endblock %}
+
+<!-- <table class="table table-xl-responsive">
+    {% for form in formset %}
+      <thead>
+        <tr>
+          <th> {{ form.time.label_tag }}</th>
+          <th> {{ form.text.label_tag }}</th>
+          <th>{{ form.text2.label_tag }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+            <th scope="row"> {{ form.time }}  {{ form.time.errors }} </th> 
+            <td>{{ form.text }} {{ form.time.errors }}</td> 
+            <td> {{ form.text2 }} {{ form.text2.errors }}</td> 
+        </tr>
+      </tbody>
+      {% endfor %}
+  </table> -->

@@ -1,0 +1,15 @@
+{% extends 'report/base.html' %}
+{% block content %}
+<h1 class="mein-title mt-4">日報アプリ</h1>
+  <div class="exposition mx-auto"  style="width: 400px;">
+    <ul>
+      <li class="mt-2">管理者が登録したユーザーの日報管理システム</li>
+      <li class="mt-2">予定、実際に行った作業が見分け易い</li>
+      <li class="mt-2">管理者からコメントによるフィードバック</li>
+      <li class="mt-2">ユーザー自身もやったことの見直しが簡単</li>
+    </ul>
+  </div> 
+  {{ user.em_user}}
+
+
+{% endblock %}

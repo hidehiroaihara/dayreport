@@ -1,0 +1,20 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+<div class="d-flex flex-column text-center">
+  <div class="p-2"><h4><span class="detail_notice_user mr-4">投稿者</span>{{ done.author.username}}<small class="text-muted"></small></h4></div>
+  <div class="p-2"><h4><span class="detail_category ml-5">{{done.category_list}}</span></h4></div>
+  <div class="p-2"><h4>日付 <small class="text-muted">{{ done.created_at|date:'Y年m月j日'}}</small></h4></div>
+  <div class="p-2">{{ done.text }}</div>
+  <div class="p-2"><span class="detail_point">申請ポイント</span><span class="point_name ml-4">{{ done.point }}</span></div>
+</div>
+
+  {% for file in done.se_done.all %}
+    <img class="rounded-0 img-size img-fluid" src="{{ file.src.url }}" alt="Edgy image">
+  {% endfor %}
+<p class="mt-5 text-center">
+{% if user.is_superuser or '4' <= user.em_user.position.order and user.id != done.author.id%}
+  <a href="{% url 'diary:done_add_to' done.pk %}" class="btn btn-primary btn-size">承認</a>
+{% endif %}
+</p>
+{% endblock %}

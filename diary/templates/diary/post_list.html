@@ -1,0 +1,137 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+<!--お知らせ-->
+{{user.em_user.position.order }}
+{% if user.is_superuser or '4' <= user.em_user.position.order %}
+  <p class="text-center"><a class="btn btn-info" href="{% url 'diary:add_notice'%}">お知らせ追加</a></p>
+{% endif%}
+    <div class="list-group">
+      <a href="#!" class="text-center list-group-item active">お知らせ</a>
+      {% for notice in notice %}
+      <a href="{% url 'diary:notice_detail' notice.pk %}" class="list-group-item list-group-item-action"><span class="ml-2 mr-4">{{notice.category}}</span>{{ notice.date|date:"Y年m月j日" }}
+      <p class="ml-5 mt-3">{{ notice.title }}</p></a>
+      {% endfor %}
+    </div>
+    
+    {{ user.profile.name }}
+    {{ user.id }}
+    {{ user.em_user.position.order }}
+
+
+<!--日記表示一覧-->
+<h1 class="diary_title text-center my-5">日報一覧</h1>
+<form method="GET" action="{% url 'diary:index' %}">
+  <input type="text" name="keyword" placeholder="タイトルで検索">
+  <button class="btn btn-outline-primary" type="submit">検索</button>
+</form>
+<table class="mt-5 table table-hover">
+  <thead>
+    <tr>
+      <th>ユーザ名</th>
+      <th>タイトル</th>
+      <th>日付</th>
+      <th>詳細</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for post in page_obj %}
+      {% if user.id == post.author.id or post.author.em_user.position.order < user.em_user.position.order %}
+        <tr>
+          <td>{{ post.author.username}}</td>
+          <td>{{ post.title }}</td>
+          <td>{{ post.date|date:"Y年m日j月" }}</td>
+          <td><a class="btn btn-outline-info" href="{% url 'diary:detail' post.pk %}">詳細</a></td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+<!--ページネーション-->
+<hr>
+<!-- 前への部分-->
+{% if page_obj.has_previous %}
+  <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+{% endif %}
+<!--数字の部分-->
+{% for num in page_boj.paginator.page_range %}
+  {% if page_obj.number == num %}
+    <span>{{ num }}</span>
+  {% else %}
+    <a href="=?page{{ num}}">{{ num }}</a>
+  {% endif %}
+{% endfor %}
+<!-- 次への部分-->
+{% if page_obj.has_next %}
+  <a href="?page={{ page_obj.next_page_number }}">Next</a>
+{% endif %}
+<!---->
+{% include 'diary/page.html' %}
+{{ today　}}
+<!--予定日記エリア-->
+<div class="container-fluid">
+  <div class="row mt-5">
+    <div class="col-md-6">
+      <div class="card">
+        <h3 class="card-header text-center card_color">本日の予定</h3>
+        <div class="card-body">
+          {% for post in post_list %}
+            {% if post.date|date:"Y-m-j" == today|date:"Y-m-j" %}
+              {% if user.id == post.author.id or post.author.em_user.position.order < user.em_user.position.order%}
+                <h4 class="card-title">{{ post.date }} </h4>
+                <p class="card-text">{{ post.title }}</p>
+                <a href="{% url 'diary:detail' post.pk %}" class="btn btn-primary">予定へ</a>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <!--昨日日記エリア-->
+    <div class="col-md-6">
+      <div class="card">
+        <h3 class="card-header text-center card_color">前日の日報報告</h3>
+        <div class="card-body">
+          {% for post in post_list %}
+            {% if post.date|date:"Y-m-j" == yestday|date:"Y-m-j" %}
+              {% if user.id == post.author.id or post.author.em_user.position.order < user.em_user.position.order %}
+                <h4 class="card-title">{{ post.date }} </h4>
+                <p class="card-text">{{ post.title }}</p>
+                <a href="{% url 'diary:detail' post.pk %}" class="btn btn-primary">日報へ</a>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--できることリスト-->
+<a href="{% url 'diary:done_add' %}" class="btn btn-primary mt-5">技術報告</a>
+<table class="table mt-3">
+  <thead class="thead-light">
+    <tr>
+      <th>ユーザ名</th>
+      <th>日付</th>
+      <th>カテゴリー</th>
+      <th>やったこと項目</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for done_list in done %}
+     {% if done_list.confirmation == True%}
+       {% if user.id == done_list.author.id %}
+          <tr>
+            <th><a href="{% url 'diary:done_detail' done_list.pk %}">{{ done_list.author.username }}</a></th>
+            <td>{{ done_list.created_at|date:"Y年m月j日" }}</td>
+            <td>{{ done_list.category_list.name }}</td>
+            <td>{{ done_list.text}}</td>
+          </tr>
+        {% endif %}
+     {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+ 
+{% endblock %}

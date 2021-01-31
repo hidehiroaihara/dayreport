@@ -1,0 +1,45 @@
+.title_color { color: rgba(82, 134, 114, 0.644); list-style: none; font-size: 22px; }
+
+.container { background-color: rgba(255, 255, 255, 0.733); }
+
+.notice { background-color: rgba(125, 237, 252, 0.774); height: 200px; }
+
+.notice_text { list-style: none; }
+
+.notice_vertical { font-size: 26px; }
+
+.triangle { border-top: 10px solid transparent; border-bottom: 10px solid transparent; border-left: 10px solid #6aa7cd; }
+
+.list_group a { box-shadow: inset 1px 1px 10px 2px rgba(255, 255, 255, 0.801); }
+
+.diary_title { padding: 1rem 2rem; border-top: 6px double rgba(40, 162, 167, 0.856); border-bottom: 6px double rgba(40, 162, 167, 0.856); color: rgba(103, 103, 252, 0.548); }
+
+.card_color { color: rgba(101, 101, 250, 0.733); }
+
+.bor { border: 1px solid rgba(54, 213, 241, 0.795); }
+
+.td_break { word-break: normal; }
+
+.moji { color: rgba(235, 94, 13, 0.89); border: 1px solid rgba(235, 94, 13, 0.89); }
+
+.moji1 { color: rgba(38, 129, 204, 0.61); border: 1px solid rgba(38, 129, 204, 0.61); }
+
+.point { color: rgba(39, 223, 116, 0.801); }
+
+.detail_notice_user { border: 1px solid black; background-color: black; color: white; }
+
+.detail_category { border: 1px solid rgba(26, 223, 115, 0.767); background-color: rgba(26, 223, 115, 0.767); color: white; }
+
+.confirmation_title1 { border: 1px solid rgba(212, 122, 38, 0.781); background-color: rgba(212, 122, 38, 0.603); color: white; font-size: 20px; }
+
+.confirmation_title2 { border: 1px solid rgba(38, 129, 204, 0.61); background-color: rgba(38, 129, 204, 0.61); color: white; font-size: 20px; }
+
+.detail_point { border: 1px solid rgba(38, 129, 204, 0.61); background-color: rgba(38, 129, 204, 0.61); color: white; }
+
+.point_name { font-size: 18px; }
+
+img { height: 200px; width: 200px; object-fit: cover; }
+
+.btn-size { width: 100px; }
+
+/*# sourceMappingURL=diary.css.map */

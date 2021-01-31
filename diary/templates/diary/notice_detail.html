@@ -1,0 +1,21 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+<div class="d-flex flex-column text-center mb-5">
+  <div class="p-2"><h4><span class="detail_notice_user mr-4">投稿者</span>{{ notice.author.username}}</h4></div>
+  <div class="p-2 mt-2"><h4><span class="detail_category ml-5"><small class="text-muted">{{notice.category}}</small></span></h4></div>
+  <div class="p-2 mt-2"><h4>日付 <small class="text-muted">{{ notice.date|date:'Y年m月j日'}}</small></h4></div>
+  <div class="p-2 mt-2">{{ notice.title }}</div>
+  <div class="p-2 mt-2">{{ notice.text }}</div>
+  {% if user.is_superuser or '4' <= user.em_user.position.order and user.id != done.author.id%}
+<div class="p-2 mt-5 py-3">
+  <a href="{% url 'diary:notice_update' notice.pk %}" class="btn btn-primary btn-size">更新</a>
+
+</div>
+{% endif %}
+</div>
+
+
+
+{% endblock %}
+  <!-- <a href="{% url 'diary:notice_delete' notice.pk %}" class="btn btn-primary btn-size">削除</a> -->

@@ -1,0 +1,25 @@
+header { background-color: rgba(182, 182, 255, 0.712); }
+
+header ul li.logo { color: white; font-size: 30px; }
+
+header ul li.box { border: 1px solid #9d9de2; }
+
+div .bag-color { background-color: rgba(255, 255, 255, 0.925); }
+
+h1 { color: black; text-align: center; }
+
+.exposition { border-bottom: dotted 1px blue; }
+
+.exposition ul { padding: 0.5em; list-style-type: none; }
+
+.exposition ul li { position: relative; padding: 0em 0.3em 0.3em 1.3em; }
+
+.exposition ul li:before { position: absolute; content: ''; top: 0.5em; left: 0.2em; height: 0; width: 0; border-style: solid; border-width: 6px 0 6px 9px; border-color: transparent transparent transparent #3F51B5; }
+
+.login_color { color: #2db0c4cc; margin: 0; padding: 0; height: 100vh; }
+
+.login_all { padding-top: 120px; }
+
+.login_center { background-color: #EAEAEA; }
+
+/*# sourceMappingURL=style.css.map */

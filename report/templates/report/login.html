@@ -1,0 +1,21 @@
+{% extends 'report/base_copy.html' %}
+{% block content %}
+<form action="" method="POST">
+    <div class="col-md-6 offset-md-3 login_all">
+        <div class="card">
+          <h3 class="card-header text-center">Login</h3>
+            <div class="card-body text-center login_center">
+                {{ form.non_field_errors }}
+                {% for field in form %}
+                    {{ field }}
+                    {{ field.errors }}
+                    <hr>
+                {% endfor %}
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline-primary btn-lg btn-block" >ログイン</button>
+                <input type="hidden" name="next" value="{{ next }}" />
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

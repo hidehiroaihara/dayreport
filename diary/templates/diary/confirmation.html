@@ -1,0 +1,27 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+{% if user.is_superuser or '4' <= user.em_user.position.order %}
+<p class="confirmation_title1 w-25 mx-auto text-center">未確認</p>
+<div class="list-group">
+  {% for done_list in done %}
+    {% if done_list.confirmation == False %}
+      <a href="{% url 'diary:done_detail' done_list.pk %}" class="list-group-item list-group-item-action">
+      <span class="moji">未確認</span>  {{ done_list.author.username }}  {{ done_list.category_list.name}}  {{ done_list.text}}  {{ done_list.created_at|date:"Y年m月j日"}}  <span class="ml-2 point">希望ポイント</span>{{ done_list.point}}  
+      </a>
+    {% endif%}
+  {% endfor %}
+</div>
+<p class="confirmation_title2 w-25 mx-auto text-center my-3">承認済み</p>
+<div class="list-group mb-3">
+  {% for done_list in done %}
+    {% if done_list.confirmation == True%}
+      <a href="{% url 'diary:done_detail' done_list.pk %}" class="list-group-item list-group-item-action list-group-item-primary">
+        <span class="moji1">承認済み</span>  {{ done_list.author.username }}  {{ done_list.category_list.name}}  {{ done_list.text}}  {{ done_list.created_at|date:"Y年m月j日"}}  <span class="ml-2 point">希望ポイント</span>{{ done_list.point}}  
+      </a>
+    {% endif%}
+  {% endfor %}
+</div>
+
+{% endif %}
+{% endblock %}

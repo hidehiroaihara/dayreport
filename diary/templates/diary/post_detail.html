@@ -1,0 +1,52 @@
+{% extends 'diary/base.html' %}
+
+{% block content %}
+{{ post2.author }}
+{{ post2.id }}
+<table class="table">
+  <tr>
+    <th>タイトル</th>
+    <td>{{ post.title }}</td>
+  </tr>
+  <tr>
+    <th>日付</th>
+    <td>{{ post.date }}</td>
+  </tr>
+</table>
+<table class="table table-responsive td_break">
+  <colgroup width="10%"></colgroup>
+  <colgroup width="10%"></colgroup>
+  <colgroup width="10%"></colgroup>
+  <colgroup width="70%"></colgroup>
+  {% for post2 in post.se_post.all %}
+  <tr>
+    <th rowspan="2">時間</th>
+    <td rowspan="2">{{ post2.time }}</td>
+    <th rowspan="1">予定</th>
+    <td class="td_break w-100" rowspan="1">{{ post2.text | linebreaksbr }}</td>
+  </tr>
+  <tr>
+    <th rowspan="1">実際</th>
+    <td class="td_break w-100" rowspan="1">{{ post2.text2 | linebreaksbr }}</td>
+  </tr>
+  {% endfor%}
+ </table>
+ <a href="{% url 'diary:update_post' post.pk %}" class="btn btn-primary">更新</a>
+
+ <div class="text-center mt-5">
+ <h2>コメントする</h2>
+ <form action="" method="POST">
+   {{ form.as_p }}
+   {% csrf_token %}
+   <button type="submit" class="btn btn-secondary">送信</button>
+ </form>
+ </div>
+ <div class="text-center mt-5">
+ <h2>コメント欄</h2>
+ {% for comment in post.comment_set.all %}
+  <p>{{ comment.author }}</p>
+   <p>{{ comment.text | linebreaks }}</p>
+   <p>{{ comment.created_at }}</p>
+ {% endfor%}
+</div>
+{% endblock %}
